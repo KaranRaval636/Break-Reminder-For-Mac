@@ -1,0 +1,458 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A9772671DB24278A446B0AC /* BreakReminderApp.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 45FBEE335E574C05B65E1931 /* BreakReminderApp.swift */; };
+		B23F2A7F2002438CA3C03813 /* AppDelegate.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = CE6DC64972F343E8B438A94F /* AppDelegate.swift */; };
+		283811DCA39B4CD191868DB8 /* TimerState.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 114816EC6B7640F9945BF003 /* TimerState.swift */; };
+		66969488D11A43EF9F430E4F /* AppSettings.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 10B9631739234D979621C0DE /* AppSettings.swift */; };
+		03B9F16810414E6EA1298371 /* DailyStatistics.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 50EE94A4E7A74F91BD78B534 /* DailyStatistics.swift */; };
+		C240EBED796B4D06A07BC4B0 /* TimerManager.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = B5530489FA2A4BB28DE1BB1C /* TimerManager.swift */; };
+		3A397DA565524E30A7B3B971 /* BreakWindowManager.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 50F549EACD4B4C8A91FBAEAA /* BreakWindowManager.swift */; };
+		F8BF8A6077634AEC9C3DF36F /* NotificationManager.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = E269B2EC6C10491BBFD351B0 /* NotificationManager.swift */; };
+		E889304579154EEB9B9E9690 /* SoundManager.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 829AE8CCB3144E7DAE55AE4E /* SoundManager.swift */; };
+		4C04F5516E434FB38AB82029 /* StatisticsManager.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 6342B69B5C7B41C290886769 /* StatisticsManager.swift */; };
+		8832682678894EEA93754B19 /* LaunchAtLoginManager.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 7C37CE4E8336450C975CEB36 /* LaunchAtLoginManager.swift */; };
+		DD56FDC5F5B84353B2E3A6C9 /* AppWindowManager.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 09C1D527392D479BAF395A08 /* AppWindowManager.swift */; };
+		89129C51C3B5488FBCD2AFFF /* MenuBarView.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 01746FCE81124FB4B52EC157 /* MenuBarView.swift */; };
+		B529F7EC51B64B20A285C615 /* DashboardView.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 83347D030B0D43A0B73DE748 /* DashboardView.swift */; };
+		6D1EA0F596D748B4B0D9AB5E /* SettingsView.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 44B23174C35E4D7EAB91C06A /* SettingsView.swift */; };
+		46F7153428F6455D91428DB5 /* BreakScreenView.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = FF0EED0DE97C48CE9FFB02C3 /* BreakScreenView.swift */; };
+		0DAFCE3ECBE44D4DAE0A5484 /* StatisticsView.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = B670B46426B34003A5B7B2DF /* StatisticsView.swift */; };
+		CBCA8D35B1D24C29941C2E6E /* WellnessBackground.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = BAEF197AA3D246EC9D1FBE3F /* WellnessBackground.swift */; };
+		AA68B05987514E97A4DC4748 /* ProgressRingView.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 7C7FCE5A50084A8F9352C84D /* ProgressRingView.swift */; };
+		DBFF42046CA946338B85FCBF /* DateHelpers.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 4D68F23AEB5D4B1F9FC60192 /* DateHelpers.swift */; };
+		EE19E16AE5D04C848221633E /* Assets.xcassets in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 9B58424AD4444D63B0004986 /* Assets.xcassets */; };
+		808DB19E3F09438C90ED4400 /* TimerManagerTests.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 4D331D2272A64BA285101E63 /* TimerManagerTests.swift */; };
+		225648D241F94FA0B8F3B92C /* BreakWindowManagerTests.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = D58E248320684F2DB9F17037 /* BreakWindowManagerTests.swift */; };
+		F9762C261B674D789C51D67A /* AppSettingsTests.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 16C92238CF12454D9CB263ED /* AppSettingsTests.swift */; };
+		DBD199DD90704203AB45C24A /* StatisticsManagerTests.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = B6A64C32626940B09C98F6E1 /* StatisticsManagerTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2B784543096749728FF5A65D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B497BE7E569442DA3E2061D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F97745EFB3864EDABF69BA43;
+			remoteInfo = BreakReminder;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1296FDF884E94642B192A9E0 /* BreakReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BreakReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9604ED20A2924393AAAC35F3 /* BreakReminderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BreakReminderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		45FBEE335E574C05B65E1931 /* BreakReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BreakReminderApp.swift"; path = "BreakReminder/App/BreakReminderApp.swift"; sourceTree = "<group>"; };
+		CE6DC64972F343E8B438A94F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AppDelegate.swift"; path = "BreakReminder/App/AppDelegate.swift"; sourceTree = "<group>"; };
+		114816EC6B7640F9945BF003 /* TimerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TimerState.swift"; path = "BreakReminder/Models/TimerState.swift"; sourceTree = "<group>"; };
+		10B9631739234D979621C0DE /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AppSettings.swift"; path = "BreakReminder/Models/AppSettings.swift"; sourceTree = "<group>"; };
+		50EE94A4E7A74F91BD78B534 /* DailyStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DailyStatistics.swift"; path = "BreakReminder/Models/DailyStatistics.swift"; sourceTree = "<group>"; };
+		B5530489FA2A4BB28DE1BB1C /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TimerManager.swift"; path = "BreakReminder/Managers/TimerManager.swift"; sourceTree = "<group>"; };
+		50F549EACD4B4C8A91FBAEAA /* BreakWindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BreakWindowManager.swift"; path = "BreakReminder/Managers/BreakWindowManager.swift"; sourceTree = "<group>"; };
+		E269B2EC6C10491BBFD351B0 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NotificationManager.swift"; path = "BreakReminder/Managers/NotificationManager.swift"; sourceTree = "<group>"; };
+		829AE8CCB3144E7DAE55AE4E /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SoundManager.swift"; path = "BreakReminder/Managers/SoundManager.swift"; sourceTree = "<group>"; };
+		6342B69B5C7B41C290886769 /* StatisticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StatisticsManager.swift"; path = "BreakReminder/Managers/StatisticsManager.swift"; sourceTree = "<group>"; };
+		7C37CE4E8336450C975CEB36 /* LaunchAtLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "LaunchAtLoginManager.swift"; path = "BreakReminder/Managers/LaunchAtLoginManager.swift"; sourceTree = "<group>"; };
+		09C1D527392D479BAF395A08 /* AppWindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AppWindowManager.swift"; path = "BreakReminder/Managers/AppWindowManager.swift"; sourceTree = "<group>"; };
+		01746FCE81124FB4B52EC157 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MenuBarView.swift"; path = "BreakReminder/Views/MenuBarView.swift"; sourceTree = "<group>"; };
+		83347D030B0D43A0B73DE748 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DashboardView.swift"; path = "BreakReminder/Views/DashboardView.swift"; sourceTree = "<group>"; };
+		44B23174C35E4D7EAB91C06A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SettingsView.swift"; path = "BreakReminder/Views/SettingsView.swift"; sourceTree = "<group>"; };
+		FF0EED0DE97C48CE9FFB02C3 /* BreakScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BreakScreenView.swift"; path = "BreakReminder/Views/BreakScreenView.swift"; sourceTree = "<group>"; };
+		B670B46426B34003A5B7B2DF /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StatisticsView.swift"; path = "BreakReminder/Views/StatisticsView.swift"; sourceTree = "<group>"; };
+		BAEF197AA3D246EC9D1FBE3F /* WellnessBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "WellnessBackground.swift"; path = "BreakReminder/Views/Components/WellnessBackground.swift"; sourceTree = "<group>"; };
+		7C7FCE5A50084A8F9352C84D /* ProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ProgressRingView.swift"; path = "BreakReminder/Views/Components/ProgressRingView.swift"; sourceTree = "<group>"; };
+		4D68F23AEB5D4B1F9FC60192 /* DateHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DateHelpers.swift"; path = "BreakReminder/Utilities/DateHelpers.swift"; sourceTree = "<group>"; };
+		9B58424AD4444D63B0004986 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Assets.xcassets"; path = "BreakReminder/Resources/Assets.xcassets"; sourceTree = "<group>"; };
+		8B9E17738BC7472A9027E146 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info.plist"; path = "BreakReminder/Resources/Info.plist"; sourceTree = "<group>"; };
+		A91346281A0C445BB194CD8E /* BreakReminder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "BreakReminder.entitlements"; path = "BreakReminder/Resources/BreakReminder.entitlements"; sourceTree = "<group>"; };
+		4D331D2272A64BA285101E63 /* TimerManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TimerManagerTests.swift"; path = "BreakReminderTests/TimerManagerTests.swift"; sourceTree = "<group>"; };
+		D58E248320684F2DB9F17037 /* BreakWindowManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BreakWindowManagerTests.swift"; path = "BreakReminderTests/BreakWindowManagerTests.swift"; sourceTree = "<group>"; };
+		16C92238CF12454D9CB263ED /* AppSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AppSettingsTests.swift"; path = "BreakReminderTests/AppSettingsTests.swift"; sourceTree = "<group>"; };
+		B6A64C32626940B09C98F6E1 /* StatisticsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StatisticsManagerTests.swift"; path = "BreakReminderTests/StatisticsManagerTests.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		22F9CE486F9449E190B50033 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		993E219544654C079E0AEFED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		503C50358A7148F9BBE7D323 = {
+			isa = PBXGroup;
+			children = (
+				45FBEE335E574C05B65E1931 /* BreakReminderApp.swift */,
+				CE6DC64972F343E8B438A94F /* AppDelegate.swift */,
+				114816EC6B7640F9945BF003 /* TimerState.swift */,
+				10B9631739234D979621C0DE /* AppSettings.swift */,
+				50EE94A4E7A74F91BD78B534 /* DailyStatistics.swift */,
+				B5530489FA2A4BB28DE1BB1C /* TimerManager.swift */,
+				50F549EACD4B4C8A91FBAEAA /* BreakWindowManager.swift */,
+				E269B2EC6C10491BBFD351B0 /* NotificationManager.swift */,
+				829AE8CCB3144E7DAE55AE4E /* SoundManager.swift */,
+				6342B69B5C7B41C290886769 /* StatisticsManager.swift */,
+				7C37CE4E8336450C975CEB36 /* LaunchAtLoginManager.swift */,
+				09C1D527392D479BAF395A08 /* AppWindowManager.swift */,
+				01746FCE81124FB4B52EC157 /* MenuBarView.swift */,
+				83347D030B0D43A0B73DE748 /* DashboardView.swift */,
+				44B23174C35E4D7EAB91C06A /* SettingsView.swift */,
+				FF0EED0DE97C48CE9FFB02C3 /* BreakScreenView.swift */,
+				B670B46426B34003A5B7B2DF /* StatisticsView.swift */,
+				BAEF197AA3D246EC9D1FBE3F /* WellnessBackground.swift */,
+				7C7FCE5A50084A8F9352C84D /* ProgressRingView.swift */,
+				4D68F23AEB5D4B1F9FC60192 /* DateHelpers.swift */,
+				9B58424AD4444D63B0004986 /* Assets.xcassets */,
+				8B9E17738BC7472A9027E146 /* Info.plist */,
+				A91346281A0C445BB194CD8E /* BreakReminder.entitlements */,
+				4D331D2272A64BA285101E63 /* TimerManagerTests.swift */,
+				D58E248320684F2DB9F17037 /* BreakWindowManagerTests.swift */,
+				16C92238CF12454D9CB263ED /* AppSettingsTests.swift */,
+				B6A64C32626940B09C98F6E1 /* StatisticsManagerTests.swift */,
+				67616B872BE841B2BCD60B40 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		67616B872BE841B2BCD60B40 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1296FDF884E94642B192A9E0 /* BreakReminder.app */,
+				9604ED20A2924393AAAC35F3 /* BreakReminderTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F97745EFB3864EDABF69BA43 /* BreakReminder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F0C6D7662E9452492E0851F /* Build configuration list for PBXNativeTarget "BreakReminder" */;
+			buildPhases = (
+				880C50DA70664D1B9DF92881 /* Sources */,
+				22F9CE486F9449E190B50033 /* Frameworks */,
+				533ED15C0AC2412E8B50C347 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BreakReminder;
+			productName = BreakReminder;
+			productReference = 1296FDF884E94642B192A9E0 /* BreakReminder.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F89C337D99FA4EAEB5AD1C95 /* BreakReminderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 56E57905EBC247619A2C3906 /* Build configuration list for PBXNativeTarget "BreakReminderTests" */;
+			buildPhases = (
+				6CAE300433D440998FFFFEB1 /* Sources */,
+				993E219544654C079E0AEFED /* Frameworks */,
+				6182B3BCA0D04E50A67FEE83 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CBFDBE235F5F4893B7C878E4 /* PBXTargetDependency */,
+			);
+			name = BreakReminderTests;
+			productName = BreakReminderTests;
+			productReference = 9604ED20A2924393AAAC35F3 /* BreakReminderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8B497BE7E569442DA3E2061D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					F97745EFB3864EDABF69BA43 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					F89C337D99FA4EAEB5AD1C95 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = F97745EFB3864EDABF69BA43;
+					};
+				};
+			};
+			buildConfigurationList = D4E647A5CE3F4797A2BBF69B /* Build configuration list for PBXProject "BreakReminder" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 503C50358A7148F9BBE7D323;
+			productRefGroup = 67616B872BE841B2BCD60B40 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F97745EFB3864EDABF69BA43 /* BreakReminder */,
+				F89C337D99FA4EAEB5AD1C95 /* BreakReminderTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		533ED15C0AC2412E8B50C347 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE19E16AE5D04C848221633E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6182B3BCA0D04E50A67FEE83 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		880C50DA70664D1B9DF92881 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A9772671DB24278A446B0AC /* BreakReminderApp.swift in Sources */,
+				B23F2A7F2002438CA3C03813 /* AppDelegate.swift in Sources */,
+				283811DCA39B4CD191868DB8 /* TimerState.swift in Sources */,
+				66969488D11A43EF9F430E4F /* AppSettings.swift in Sources */,
+				03B9F16810414E6EA1298371 /* DailyStatistics.swift in Sources */,
+				C240EBED796B4D06A07BC4B0 /* TimerManager.swift in Sources */,
+				3A397DA565524E30A7B3B971 /* BreakWindowManager.swift in Sources */,
+				F8BF8A6077634AEC9C3DF36F /* NotificationManager.swift in Sources */,
+				E889304579154EEB9B9E9690 /* SoundManager.swift in Sources */,
+				4C04F5516E434FB38AB82029 /* StatisticsManager.swift in Sources */,
+				8832682678894EEA93754B19 /* LaunchAtLoginManager.swift in Sources */,
+				DD56FDC5F5B84353B2E3A6C9 /* AppWindowManager.swift in Sources */,
+				89129C51C3B5488FBCD2AFFF /* MenuBarView.swift in Sources */,
+				B529F7EC51B64B20A285C615 /* DashboardView.swift in Sources */,
+				6D1EA0F596D748B4B0D9AB5E /* SettingsView.swift in Sources */,
+				46F7153428F6455D91428DB5 /* BreakScreenView.swift in Sources */,
+				0DAFCE3ECBE44D4DAE0A5484 /* StatisticsView.swift in Sources */,
+				CBCA8D35B1D24C29941C2E6E /* WellnessBackground.swift in Sources */,
+				AA68B05987514E97A4DC4748 /* ProgressRingView.swift in Sources */,
+				DBFF42046CA946338B85FCBF /* DateHelpers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CAE300433D440998FFFFEB1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				808DB19E3F09438C90ED4400 /* TimerManagerTests.swift in Sources */,
+				225648D241F94FA0B8F3B92C /* BreakWindowManagerTests.swift in Sources */,
+				F9762C261B674D789C51D67A /* AppSettingsTests.swift in Sources */,
+				DBD199DD90704203AB45C24A /* StatisticsManagerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CBFDBE235F5F4893B7C878E4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F97745EFB3864EDABF69BA43 /* BreakReminder */;
+			targetProxy = 2B784543096749728FF5A65D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		6363A065EC9F4383830EA220 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		BAE6E7483C484890982B9C64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		1F30E225B2E84D1598123BEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BreakReminder/Resources/BreakReminder.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BreakReminder/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.breakreminder.BreakReminder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		98143C8842654E648D7F0990 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BreakReminder/Resources/BreakReminder.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BreakReminder/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.breakreminder.BreakReminder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		2984D88599FB44BEA76520DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.breakreminder.BreakReminderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BreakReminder.app/Contents/MacOS/BreakReminder";
+			};
+			name = Debug;
+		};
+		8445CE955ED24045BF28F707 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.breakreminder.BreakReminderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BreakReminder.app/Contents/MacOS/BreakReminder";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D4E647A5CE3F4797A2BBF69B /* Build configuration list for PBXProject "BreakReminder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6363A065EC9F4383830EA220 /* Debug */,
+				BAE6E7483C484890982B9C64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0F0C6D7662E9452492E0851F /* Build configuration list for PBXNativeTarget "BreakReminder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F30E225B2E84D1598123BEA /* Debug */,
+				98143C8842654E648D7F0990 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		56E57905EBC247619A2C3906 /* Build configuration list for PBXNativeTarget "BreakReminderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2984D88599FB44BEA76520DF /* Debug */,
+				8445CE955ED24045BF28F707 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 8B497BE7E569442DA3E2061D /* Project object */;
+}
