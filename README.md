@@ -17,7 +17,7 @@ If you just want to install and use the app without touching any code or develop
 
 📦 **Ready-to-Use DMG Installer**:
 - **Location**: [`dist/BreakReminder-1.0.0.dmg`](file:/Documents/Break%20Reminder%20Mac/dist/BreakReminder-1.0.0.dmg)
-- **Direct Workspace Path**: `/Users/karanraval/Documents/Break Reminder Mac/dist/BreakReminder-1.0.0.dmg`
+- **Direct Workspace Path**: `/Documents/Break Reminder Mac/dist/BreakReminder-1.0.0.dmg`
 - **Compatibility**: macOS 13.0 (Ventura), macOS 14 (Sonoma), macOS 15 (Sequoia) or newer (Apple Silicon & Intel)
 
 ---
