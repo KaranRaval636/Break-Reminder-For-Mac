@@ -4,12 +4,23 @@ import Combine
 public protocol StatisticsManaging: AnyObject {
     var records: [DailyRecord] { get }
     var aggregate: AggregateStatistics { get }
+    var todayRecord: DailyRecord { get }
     func recordWorkSessionCompleted(duration: TimeInterval)
     func recordBreakCompleted(duration: TimeInterval)
     func recordBreakSkipped()
+    func recordNaturalBreak()
     func recordWorkTime(seconds: TimeInterval)
     func recordBreakTime(seconds: TimeInterval)
     func clearAll()
+}
+
+public extension StatisticsManaging {
+    var todayRecord: DailyRecord {
+        let todayId = DateHelpers.dayIdentifier()
+        return records.first(where: { $0.dateIdentifier == todayId }) ?? DailyRecord(dateIdentifier: todayId)
+    }
+    
+    func recordNaturalBreak() {}
 }
 
 public final class StatisticsManager: ObservableObject, StatisticsManaging {
@@ -25,26 +36,65 @@ public final class StatisticsManager: ObservableObject, StatisticsManaging {
         loadRecords()
     }
     
+    public var todayRecord: DailyRecord {
+        let todayId = DateHelpers.dayIdentifier()
+        return records.first(where: { $0.dateIdentifier == todayId }) ?? DailyRecord(dateIdentifier: todayId)
+    }
+    
     public var aggregate: AggregateStatistics {
         let totalSessions = records.reduce(0) { $0 + $1.completedWorkSessions }
         let totalBreaks = records.reduce(0) { $0 + $1.completedBreaks }
         let totalSkipped = records.reduce(0) { $0 + $1.skippedBreaks }
         let totalWorkTime = records.reduce(0) { $0 + $1.workTimeSeconds }
         let totalBreakTime = records.reduce(0) { $0 + $1.breakTimeSeconds }
+        let totalNatural = records.reduce(0) { $0 + $1.naturalBreaks }
+        let longestWork = records.map(\.longestWorkSessionSeconds).max() ?? 0
+        
+        let avgWork = totalSessions > 0 ? totalWorkTime / Double(totalSessions) : totalWorkTime
+        let totalAllBreaks = totalBreaks + totalNatural
+        let avgBreak = totalAllBreaks > 0 ? totalBreakTime / Double(totalAllBreaks) : 0
         
         return AggregateStatistics(
             totalCompletedWorkSessions: totalSessions,
             totalCompletedBreaks: totalBreaks,
             totalSkippedBreaks: totalSkipped,
             totalWorkTimeSeconds: totalWorkTime,
-            totalBreakTimeSeconds: totalBreakTime
+            totalBreakTimeSeconds: totalBreakTime,
+            totalNaturalBreaks: totalNatural,
+            longestWorkSessionSeconds: longestWork,
+            averageWorkSessionSeconds: avgWork,
+            averageBreakDurationSeconds: avgBreak
         )
+    }
+    
+    /// Returns the last N days (chronological order) for charts, filling in any missing dates.
+    public func recentDays(count: Int = 7) -> [DailyRecord] {
+        var result: [DailyRecord] = []
+        let calendar = Calendar.current
+        let today = Date()
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        for i in (0..<count).reversed() {
+            guard let date = calendar.date(byAdding: .day, value: -i, to: today) else { continue }
+            let id = formatter.string(from: date)
+            if let existing = records.first(where: { $0.dateIdentifier == id }) {
+                result.append(existing)
+            } else {
+                result.append(DailyRecord(dateIdentifier: id))
+            }
+        }
+        return result
     }
     
     public func recordWorkSessionCompleted(duration: TimeInterval) {
         mutateTodayRecord { record in
             record.completedWorkSessions += 1
             record.workTimeSeconds += duration
+            if duration > record.longestWorkSessionSeconds {
+                record.longestWorkSessionSeconds = duration
+            }
         }
     }
     
@@ -61,10 +111,19 @@ public final class StatisticsManager: ObservableObject, StatisticsManaging {
         }
     }
     
+    public func recordNaturalBreak() {
+        mutateTodayRecord { record in
+            record.naturalBreaks += 1
+        }
+    }
+    
     public func recordWorkTime(seconds: TimeInterval) {
         guard seconds > 0 else { return }
         mutateTodayRecord { record in
             record.workTimeSeconds += seconds
+            if seconds > record.longestWorkSessionSeconds {
+                record.longestWorkSessionSeconds = seconds
+            }
         }
     }
     
@@ -93,7 +152,6 @@ public final class StatisticsManager: ObservableObject, StatisticsManaging {
             mutation(&newRecord)
             records.append(newRecord)
         }
-        // Keep sorted by date descending (most recent first)
         records.sort { $0.dateIdentifier > $1.dateIdentifier }
         saveRecords()
     }
@@ -102,9 +160,9 @@ public final class StatisticsManager: ObservableObject, StatisticsManaging {
         guard let data = userDefaults.data(forKey: storageKey) else { return }
         do {
             let decoded = try JSONDecoder().decode([DailyRecord].self, from: data)
-            self.records = decoded.sorted { $0.dateIdentifier > $1.dateIdentifier }
+            self.records = decoded
         } catch {
-            NSLog("[StatisticsManager] Failed to decode statistics: %@", error.localizedDescription)
+            NSLog("[StatisticsManager] Failed to decode daily records: %@", error.localizedDescription)
         }
     }
     
@@ -113,7 +171,7 @@ public final class StatisticsManager: ObservableObject, StatisticsManaging {
             let data = try JSONEncoder().encode(records)
             userDefaults.set(data, forKey: storageKey)
         } catch {
-            NSLog("[StatisticsManager] Failed to encode statistics: %@", error.localizedDescription)
+            NSLog("[StatisticsManager] Failed to encode daily records: %@", error.localizedDescription)
         }
     }
 }

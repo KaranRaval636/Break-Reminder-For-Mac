@@ -4,54 +4,57 @@ import SwiftUI
 public final class AppWindowManager: ObservableObject {
     public static let shared = AppWindowManager()
     
-    private var settingsWindow: NSWindow?
-    private var statisticsWindow: NSWindow?
+    private var mainWindow: NSWindow?
     
     public init() {}
     
-    public func showSettingsWindow(timerManager: TimerManager, settings: AppSettings) {
-        if let window = settingsWindow {
+    public func showMainWindow(
+        section: NavigationSection = .dashboard,
+        timerManager: TimerManager = .shared,
+        settings: AppSettings = .shared,
+        statisticsManager: StatisticsManager = .shared
+    ) {
+        if let window = mainWindow {
+            // Re-host if section changed or update content
+            let mainView = MainWindowView(
+                settings: settings,
+                timerManager: timerManager,
+                statisticsManager: statisticsManager,
+                initialSection: section
+            )
+            window.contentViewController = NSHostingController(rootView: mainView)
             window.makeKeyAndOrderFront(nil)
             NSApp.activate(ignoringOtherApps: true)
             return
         }
         
-        let settingsView = SettingsView(settings: settings, timerManager: timerManager)
-        let hostingController = NSHostingController(rootView: settingsView)
+        let mainView = MainWindowView(
+            settings: settings,
+            timerManager: timerManager,
+            statisticsManager: statisticsManager,
+            initialSection: section
+        )
+        let hostingController = NSHostingController(rootView: mainView)
         
         let window = NSWindow(contentViewController: hostingController)
-        window.title = "Break Reminder Settings"
-        window.styleMask = [.titled, .closable, .miniaturizable]
+        window.title = "Break Reminder"
+        window.styleMask = [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView]
+        window.setContentSize(NSSize(width: 960, height: 640))
+        window.minSize = NSSize(width: 820, height: 520)
         window.isReleasedWhenClosed = false
         window.center()
-        window.setFrameAutosaveName("BreakReminder_Settings_Window")
+        window.setFrameAutosaveName("BreakReminder_Main_Window")
         
-        self.settingsWindow = window
+        self.mainWindow = window
         window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
     }
     
-    public func showStatisticsWindow(statisticsManager: StatisticsManager) {
-        if let window = statisticsWindow {
-            window.makeKeyAndOrderFront(nil)
-            NSApp.activate(ignoringOtherApps: true)
-            return
-        }
-        
-        let statsView = StatisticsView(statisticsManager: statisticsManager)
-        let hostingController = NSHostingController(rootView: statsView)
-        
-        let window = NSWindow(contentViewController: hostingController)
-        window.title = "Break Reminder Statistics"
-        window.styleMask = [.titled, .closable, .miniaturizable, .resizable]
-        window.setContentSize(NSSize(width: 580, height: 460))
-        window.minSize = NSSize(width: 480, height: 380)
-        window.isReleasedWhenClosed = false
-        window.center()
-        window.setFrameAutosaveName("BreakReminder_Statistics_Window")
-        
-        self.statisticsWindow = window
-        window.makeKeyAndOrderFront(nil)
-        NSApp.activate(ignoringOtherApps: true)
+    public func showSettingsWindow(timerManager: TimerManager = .shared, settings: AppSettings = .shared) {
+        showMainWindow(section: .screenBreaks, timerManager: timerManager, settings: settings)
+    }
+    
+    public func showStatisticsWindow(statisticsManager: StatisticsManager = .shared) {
+        showMainWindow(section: .statistics, statisticsManager: statisticsManager)
     }
 }

@@ -26,6 +26,10 @@ public enum DateHelpers {
         }
     }
     
+    public static func formatHoursAndMinutes(_ seconds: TimeInterval) -> String {
+        return formatDurationDetailed(seconds)
+    }
+    
     public static func dayIdentifier(for date: Date = Date()) -> String {
         let formatter = DateFormatter()
         formatter.calendar = Calendar.current

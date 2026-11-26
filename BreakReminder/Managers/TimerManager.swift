@@ -26,14 +26,40 @@ public final class TimerManager: ObservableObject {
     @Published public private(set) var completedWorkSessionsInCycle: Int = 0
     @Published public private(set) var isLongBreak: Bool = false
     @Published public private(set) var sessionStartDate: Date?
+    @Published public private(set) var currentSnoozeCount: Int = 0
     
-    // Internal paused state
+    // Smart Pause integration
+    @Published public private(set) var isSmartPaused: Bool = false
+    @Published public private(set) var smartPauseReason: String? = nil
+    
+    // Internal state
     private var pausedRemainingSeconds: TimeInterval?
+    private var hasSentPreBreakNotification: Bool = false
     
     public var progressFraction: Double {
         guard totalDurationSeconds > 0 else { return 0.0 }
         let elapsed = totalDurationSeconds - remainingSeconds
         return max(0.0, min(1.0, elapsed / totalDurationSeconds))
+    }
+    
+    public var canSnooze: Bool {
+        guard settings.allowSnooze && !settings.strictMode else { return false }
+        if settings.snoozeLimit > 0 {
+            return currentSnoozeCount < settings.snoozeLimit
+        }
+        return true
+    }
+    
+    public var remainingSnoozes: Int? {
+        guard settings.allowSnooze && !settings.strictMode else { return 0 }
+        if settings.snoozeLimit > 0 {
+            return max(0, settings.snoozeLimit - currentSnoozeCount)
+        }
+        return nil // unlimited
+    }
+    
+    public var canSkip: Bool {
+        return settings.allowSkip && !settings.strictMode
     }
     
     public init(
@@ -115,9 +141,12 @@ public final class TimerManager: ObservableObject {
         sessionStartDate = now
         pausedRemainingSeconds = nil
         isLongBreak = false
+        currentSnoozeCount = 0
+        hasSentPreBreakNotification = false
         
         notificationManager.requestAuthorizationIfNeeded()
         saveState()
+        AutomationHookManager.shared.handleEvent(.workSessionStarted)
         startTicker()
     }
     
@@ -152,14 +181,20 @@ public final class TimerManager: ObservableObject {
         startTicker()
     }
     
-    public func startBreak(isLong: Bool? = nil) {
+    public func startBreak(isLong: Bool? = nil, durationMinutes: Int? = nil) {
         stopTicker()
         
         let shouldBeLong = isLong ?? (completedWorkSessionsInCycle >= settings.longBreakFrequency)
         isLongBreak = shouldBeLong
         
-        let durationMinutes = shouldBeLong ? settings.longBreakMinutes : settings.shortBreakMinutes
-        let duration = TimeInterval(durationMinutes * 60)
+        let minutes: Int
+        if let customMinutes = durationMinutes {
+            minutes = customMinutes
+        } else {
+            minutes = shouldBeLong ? settings.longBreakMinutes : settings.shortBreakMinutes
+        }
+        
+        let duration = TimeInterval(minutes * 60)
         let now = Date()
         
         status = .onBreak
@@ -168,26 +203,32 @@ public final class TimerManager: ObservableObject {
         targetEndDate = now.addingTimeInterval(duration)
         sessionStartDate = now
         pausedRemainingSeconds = nil
+        hasSentPreBreakNotification = false
         
         soundManager.playWorkFinishedSound()
         notificationManager.sendWorkFinishedNotification(isLongBreak: shouldBeLong)
         breakWindowManager.showBreakOverlay(timerManager: self)
         
         saveState()
+        AutomationHookManager.shared.handleEvent(.breakStarted(isLong: shouldBeLong))
         startTicker()
     }
     
-    public func startBreakImmediately() {
+    public func startBreakImmediately(durationMinutes: Int? = nil) {
         // Record partial work session time if we were working
         if status == .working, let start = sessionStartDate {
             let elapsed = Date().timeIntervalSince(start)
             statisticsManager.recordWorkTime(seconds: elapsed)
         }
-        startBreak()
+        startBreak(isLong: durationMinutes != nil ? false : nil, durationMinutes: durationMinutes)
+    }
+    
+    public func startImmediateBreak(durationMinutes: Int? = nil) {
+        startBreakImmediately(durationMinutes: durationMinutes)
     }
     
     public func skipBreak() {
-        guard status == .onBreak || status == .paused else { return }
+        guard (status == .onBreak || status == .paused) && canSkip else { return }
         
         stopTicker()
         breakWindowManager.hideBreakOverlay()
@@ -197,16 +238,19 @@ public final class TimerManager: ObservableObject {
         if isLongBreak {
             completedWorkSessionsInCycle = 0
         }
+        currentSnoozeCount = 0
         
+        AutomationHookManager.shared.handleEvent(.breakSkipped)
         resetToIdle()
         saveState()
     }
     
     public func snoozeBreak() {
-        guard settings.allowSnooze else { return }
+        guard canSnooze else { return }
         
         stopTicker()
         breakWindowManager.hideBreakOverlay()
+        currentSnoozeCount += 1
         
         let snoozeDuration = TimeInterval(settings.snoozeDurationMinutes * 60)
         let now = Date()
@@ -217,6 +261,7 @@ public final class TimerManager: ObservableObject {
         targetEndDate = now.addingTimeInterval(snoozeDuration)
         sessionStartDate = now
         pausedRemainingSeconds = nil
+        hasSentPreBreakNotification = false
         
         saveState()
         startTicker()
@@ -237,8 +282,37 @@ public final class TimerManager: ObservableObject {
         stopTicker()
         breakWindowManager.hideBreakOverlay()
         notificationManager.cancelPendingNotifications()
+        currentSnoozeCount = 0
+        isSmartPaused = false
+        smartPauseReason = nil
         resetToIdle()
         clearSavedState()
+    }
+    
+    // MARK: - Smart Pause Integration
+    
+    public func applySmartPause(reason: String) {
+        guard !isSmartPaused else { return }
+        isSmartPaused = true
+        smartPauseReason = reason
+        
+        AutomationHookManager.shared.handleEvent(.smartPauseActivated(reason: reason))
+        
+        if status == .working {
+            pauseTimer()
+        }
+    }
+    
+    public func resumeFromSmartPause() {
+        guard isSmartPaused else { return }
+        isSmartPaused = false
+        smartPauseReason = nil
+        
+        AutomationHookManager.shared.handleEvent(.smartPauseDeactivated)
+        
+        if status == .paused {
+            resumeTimer()
+        }
     }
     
     private func resetToIdle() {
@@ -248,6 +322,7 @@ public final class TimerManager: ObservableObject {
         totalDurationSeconds = 0
         pausedRemainingSeconds = nil
         sessionStartDate = nil
+        hasSentPreBreakNotification = false
     }
     
     // MARK: - Internal Ticker & Countdown Logic
@@ -271,6 +346,15 @@ public final class TimerManager: ObservableObject {
         guard let target = targetEndDate else { return }
         
         let remaining = target.timeIntervalSince(currentDate)
+        
+        // Check for pre-break notification
+        if status == .working && settings.preBreakNotificationEnabled && !hasSentPreBreakNotification {
+            let leadSeconds = TimeInterval(settings.preBreakNotificationLeadMinutes * 60)
+            if remaining > 0 && remaining <= leadSeconds {
+                hasSentPreBreakNotification = true
+                notificationManager.sendPreBreakNotification(minutesRemaining: settings.preBreakNotificationLeadMinutes)
+            }
+        }
         
         if remaining <= 0 {
             remainingSeconds = 0
@@ -322,10 +406,12 @@ public final class TimerManager: ObservableObject {
         breakWindowManager.hideBreakOverlay()
         soundManager.playBreakFinishedSound()
         notificationManager.sendBreakFinishedNotification()
+        AutomationHookManager.shared.handleEvent(.breakEnded)
         
         if isLongBreak {
             completedWorkSessionsInCycle = 0
         }
+        currentSnoozeCount = 0
         
         if settings.autoStartWorkTimer {
             startWorkSession()
@@ -387,7 +473,6 @@ public final class TimerManager: ObservableObject {
                         startTicker()
                     } else {
                         // Expired while app was closed
-                        // Transition gracefully to break or idle
                         completedWorkSessionsInCycle += 1
                         statisticsManager.recordWorkSessionCompleted(duration: snapshot.totalDurationSeconds)
                         resetToIdle()

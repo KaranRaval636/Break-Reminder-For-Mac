@@ -124,7 +124,7 @@ public struct MenuBarView: View {
                 case .onBreak:
                     VStack(spacing: 6) {
                         HStack(spacing: 8) {
-                            if settings.allowSnooze {
+                            if timerManager.canSnooze {
                                 Button(action: {
                                     timerManager.snoozeBreak()
                                 }) {
@@ -134,13 +134,15 @@ public struct MenuBarView: View {
                                 .buttonStyle(.bordered)
                             }
                             
-                            Button(action: {
-                                timerManager.skipBreak()
-                            }) {
-                                Label("Skip Break", systemImage: "forward.fill")
-                                    .frame(maxWidth: .infinity)
+                            if timerManager.canSkip {
+                                Button(action: {
+                                    timerManager.skipBreak()
+                                }) {
+                                    Label("Skip Break", systemImage: "forward.fill")
+                                        .frame(maxWidth: .infinity)
+                                }
+                                .buttonStyle(.bordered)
                             }
-                            .buttonStyle(.bordered)
                         }
                         
                         Button(action: {
@@ -159,16 +161,38 @@ public struct MenuBarView: View {
             // Secondary Navigation Actions
             VStack(alignment: .leading, spacing: 6) {
                 Button(action: {
-                    AppWindowManager.shared.showStatisticsWindow(statisticsManager: statisticsManager)
+                    AppWindowManager.shared.showMainWindow(
+                        section: .dashboard,
+                        timerManager: timerManager,
+                        settings: settings,
+                        statisticsManager: statisticsManager
+                    )
                 }) {
-                    Label("View Statistics", systemImage: "chart.bar.xaxis")
+                    Label("Open Dashboard & Controls", systemImage: "macwindow")
                 }
                 .buttonStyle(.plain)
                 
                 Button(action: {
-                    AppWindowManager.shared.showSettingsWindow(timerManager: timerManager, settings: settings)
+                    AppWindowManager.shared.showMainWindow(
+                        section: .screenBreaks,
+                        timerManager: timerManager,
+                        settings: settings,
+                        statisticsManager: statisticsManager
+                    )
                 }) {
-                    Label("Preferences...", systemImage: "gearshape")
+                    Label("Screen Breaks & Profiles", systemImage: "cup.and.saucer.fill")
+                }
+                .buttonStyle(.plain)
+                
+                Button(action: {
+                    AppWindowManager.shared.showMainWindow(
+                        section: .statistics,
+                        timerManager: timerManager,
+                        settings: settings,
+                        statisticsManager: statisticsManager
+                    )
+                }) {
+                    Label("View Statistics & Score", systemImage: "chart.bar.xaxis")
                 }
                 .buttonStyle(.plain)
                 

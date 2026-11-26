@@ -32,6 +32,43 @@
 		225648D241F94FA0B8F3B92C /* BreakWindowManagerTests.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = D58E248320684F2DB9F17037 /* BreakWindowManagerTests.swift */; };
 		F9762C261B674D789C51D67A /* AppSettingsTests.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = 16C92238CF12454D9CB263ED /* AppSettingsTests.swift */; };
 		DBD199DD90704203AB45C24A /* StatisticsManagerTests.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = B6A64C32626940B09C98F6E1 /* StatisticsManagerTests.swift */; };
+		B10000010000000000000001 /* BreakProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000010000000000000001 /* BreakProfile.swift */; };
+		B10000020000000000000002 /* NavigationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000002 /* NavigationSection.swift */; };
+		B10000030000000000000003 /* ScreenScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000030000000000000003 /* ScreenScore.swift */; };
+		B10000040000000000000004 /* MainWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000040000000000000004 /* MainWindowView.swift */; };
+		B10000050000000000000005 /* ScreenBreaksModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000050000000000000005 /* ScreenBreaksModuleView.swift */; };
+		B10000060000000000000006 /* SmartPauseModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000060000000000000006 /* SmartPauseModuleView.swift */; };
+		B10000070000000000000007 /* WellnessModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000070000000000000007 /* WellnessModuleView.swift */; };
+		B10000080000000000000008 /* PlannedBreaksModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000080000000000000008 /* PlannedBreaksModuleView.swift */; };
+		B10000090000000000000009 /* OfficeHoursModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000090000000000000009 /* OfficeHoursModuleView.swift */; };
+		B100000A000000000000000A /* AppearanceModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000A000000000000000A /* AppearanceModuleView.swift */; };
+		B100000B000000000000000B /* AutomationsModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000B000000000000000B /* AutomationsModuleView.swift */; };
+		B100000C000000000000000C /* GeneralSettingsModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000C000000000000000C /* GeneralSettingsModuleView.swift */; };
+		B20000010000000000000001 /* Phase1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000001 /* Phase1Tests.swift */; };
+		B100000D000000000000000D /* FloatingCountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000D000000000000000D /* FloatingCountdownView.swift */; };
+		B100000E000000000000000E /* FloatingCountdownManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000E000000000000000E /* FloatingCountdownManager.swift */; };
+		B20000020000000000000002 /* Phase2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000020000000000000002 /* Phase2Tests.swift */; };
+		B10000100000000000000010 /* SmartPauseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000100000000000000010 /* SmartPauseModels.swift */; };
+		B10000110000000000000011 /* SmartPauseDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000110000000000000011 /* SmartPauseDetector.swift */; };
+		B10000120000000000000012 /* IdleDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000120000000000000012 /* IdleDetector.swift */; };
+		B10000130000000000000013 /* ActiveApplicationDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000130000000000000013 /* ActiveApplicationDetector.swift */; };
+		B10000140000000000000014 /* FullscreenDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000140000000000000014 /* FullscreenDetector.swift */; };
+		B10000150000000000000015 /* MeetingDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000150000000000000015 /* MeetingDetector.swift */; };
+		B10000160000000000000016 /* ScreenRecordingDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000160000000000000016 /* ScreenRecordingDetector.swift */; };
+		B10000170000000000000017 /* VideoPlaybackDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000170000000000000017 /* VideoPlaybackDetector.swift */; };
+		B10000180000000000000018 /* UserFocusAppDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000180000000000000018 /* UserFocusAppDetector.swift */; };
+		B10000190000000000000019 /* SmartPauseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000190000000000000019 /* SmartPauseManager.swift */; };
+		B20000030000000000000003 /* Phase3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000030000000000000003 /* Phase3Tests.swift */; };
+		B100001A000000000000001A /* PlannedBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100001A000000000000001A /* PlannedBreak.swift */; };
+		B100001B000000000000001B /* WellnessReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100001B000000000000001B /* WellnessReminderManager.swift */; };
+		B100001C000000000000001C /* PlannedBreakManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100001C000000000000001C /* PlannedBreakManager.swift */; };
+		B100001D000000000000001D /* OfficeHoursManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100001D000000000000001D /* OfficeHoursManager.swift */; };
+		B100001E000000000000001E /* NaturalBreakManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100001E000000000000001E /* NaturalBreakManager.swift */; };
+		B20000040000000000000004 /* Phase4Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000040000000000000004 /* Phase4Tests.swift */; };
+		B20000050000000000000005 /* Phase5Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000050000000000000005 /* Phase5Tests.swift */; };
+		B10000200000000000000020 /* AutomationHookManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000200000000000000020 /* AutomationHookManager.swift */; };
+		B10000210000000000000021 /* BreakReminderIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000210000000000000021 /* BreakReminderIntents.swift */; };
+		B20000060000000000000006 /* Phase6Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000060000000000000006 /* Phase6Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +111,43 @@
 		D58E248320684F2DB9F17037 /* BreakWindowManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BreakWindowManagerTests.swift"; path = "BreakReminderTests/BreakWindowManagerTests.swift"; sourceTree = "<group>"; };
 		16C92238CF12454D9CB263ED /* AppSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AppSettingsTests.swift"; path = "BreakReminderTests/AppSettingsTests.swift"; sourceTree = "<group>"; };
 		B6A64C32626940B09C98F6E1 /* StatisticsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StatisticsManagerTests.swift"; path = "BreakReminderTests/StatisticsManagerTests.swift"; sourceTree = "<group>"; };
+		A10000010000000000000001 /* BreakProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BreakProfile.swift"; path = "BreakReminder/Models/BreakProfile.swift"; sourceTree = "<group>"; };
+		A10000020000000000000002 /* NavigationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NavigationSection.swift"; path = "BreakReminder/Models/NavigationSection.swift"; sourceTree = "<group>"; };
+		A10000030000000000000003 /* ScreenScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ScreenScore.swift"; path = "BreakReminder/Models/ScreenScore.swift"; sourceTree = "<group>"; };
+		A10000040000000000000004 /* MainWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MainWindowView.swift"; path = "BreakReminder/Views/MainWindowView.swift"; sourceTree = "<group>"; };
+		A10000050000000000000005 /* ScreenBreaksModuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ScreenBreaksModuleView.swift"; path = "BreakReminder/Views/Modules/ScreenBreaksModuleView.swift"; sourceTree = "<group>"; };
+		A10000060000000000000006 /* SmartPauseModuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SmartPauseModuleView.swift"; path = "BreakReminder/Views/Modules/SmartPauseModuleView.swift"; sourceTree = "<group>"; };
+		A10000070000000000000007 /* WellnessModuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "WellnessModuleView.swift"; path = "BreakReminder/Views/Modules/WellnessModuleView.swift"; sourceTree = "<group>"; };
+		A10000080000000000000008 /* PlannedBreaksModuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PlannedBreaksModuleView.swift"; path = "BreakReminder/Views/Modules/PlannedBreaksModuleView.swift"; sourceTree = "<group>"; };
+		A10000090000000000000009 /* OfficeHoursModuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "OfficeHoursModuleView.swift"; path = "BreakReminder/Views/Modules/OfficeHoursModuleView.swift"; sourceTree = "<group>"; };
+		A100000A000000000000000A /* AppearanceModuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AppearanceModuleView.swift"; path = "BreakReminder/Views/Modules/AppearanceModuleView.swift"; sourceTree = "<group>"; };
+		A100000B000000000000000B /* AutomationsModuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AutomationsModuleView.swift"; path = "BreakReminder/Views/Modules/AutomationsModuleView.swift"; sourceTree = "<group>"; };
+		A100000C000000000000000C /* GeneralSettingsModuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GeneralSettingsModuleView.swift"; path = "BreakReminder/Views/Modules/GeneralSettingsModuleView.swift"; sourceTree = "<group>"; };
+		A20000010000000000000001 /* Phase1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Phase1Tests.swift"; path = "BreakReminderTests/Phase1Tests.swift"; sourceTree = "<group>"; };
+		A100000D000000000000000D /* FloatingCountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FloatingCountdownView.swift"; path = "BreakReminder/Views/Components/FloatingCountdownView.swift"; sourceTree = "<group>"; };
+		A100000E000000000000000E /* FloatingCountdownManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FloatingCountdownManager.swift"; path = "BreakReminder/Managers/FloatingCountdownManager.swift"; sourceTree = "<group>"; };
+		A20000020000000000000002 /* Phase2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Phase2Tests.swift"; path = "BreakReminderTests/Phase2Tests.swift"; sourceTree = "<group>"; };
+		A10000100000000000000010 /* SmartPauseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SmartPauseModels.swift"; path = "BreakReminder/Models/SmartPauseModels.swift"; sourceTree = "<group>"; };
+		A10000110000000000000011 /* SmartPauseDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SmartPauseDetector.swift"; path = "BreakReminder/Managers/Detectors/SmartPauseDetector.swift"; sourceTree = "<group>"; };
+		A10000120000000000000012 /* IdleDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "IdleDetector.swift"; path = "BreakReminder/Managers/Detectors/IdleDetector.swift"; sourceTree = "<group>"; };
+		A10000130000000000000013 /* ActiveApplicationDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ActiveApplicationDetector.swift"; path = "BreakReminder/Managers/Detectors/ActiveApplicationDetector.swift"; sourceTree = "<group>"; };
+		A10000140000000000000014 /* FullscreenDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FullscreenDetector.swift"; path = "BreakReminder/Managers/Detectors/FullscreenDetector.swift"; sourceTree = "<group>"; };
+		A10000150000000000000015 /* MeetingDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MeetingDetector.swift"; path = "BreakReminder/Managers/Detectors/MeetingDetector.swift"; sourceTree = "<group>"; };
+		A10000160000000000000016 /* ScreenRecordingDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ScreenRecordingDetector.swift"; path = "BreakReminder/Managers/Detectors/ScreenRecordingDetector.swift"; sourceTree = "<group>"; };
+		A10000170000000000000017 /* VideoPlaybackDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VideoPlaybackDetector.swift"; path = "BreakReminder/Managers/Detectors/VideoPlaybackDetector.swift"; sourceTree = "<group>"; };
+		A10000180000000000000018 /* UserFocusAppDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UserFocusAppDetector.swift"; path = "BreakReminder/Managers/Detectors/UserFocusAppDetector.swift"; sourceTree = "<group>"; };
+		A10000190000000000000019 /* SmartPauseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SmartPauseManager.swift"; path = "BreakReminder/Managers/SmartPauseManager.swift"; sourceTree = "<group>"; };
+		A20000030000000000000003 /* Phase3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Phase3Tests.swift"; path = "BreakReminderTests/Phase3Tests.swift"; sourceTree = "<group>"; };
+		A100001A000000000000001A /* PlannedBreak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PlannedBreak.swift"; path = "BreakReminder/Models/PlannedBreak.swift"; sourceTree = "<group>"; };
+		A100001B000000000000001B /* WellnessReminderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "WellnessReminderManager.swift"; path = "BreakReminder/Managers/WellnessReminderManager.swift"; sourceTree = "<group>"; };
+		A100001C000000000000001C /* PlannedBreakManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PlannedBreakManager.swift"; path = "BreakReminder/Managers/PlannedBreakManager.swift"; sourceTree = "<group>"; };
+		A100001D000000000000001D /* OfficeHoursManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "OfficeHoursManager.swift"; path = "BreakReminder/Managers/OfficeHoursManager.swift"; sourceTree = "<group>"; };
+		A100001E000000000000001E /* NaturalBreakManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NaturalBreakManager.swift"; path = "BreakReminder/Managers/NaturalBreakManager.swift"; sourceTree = "<group>"; };
+		A20000040000000000000004 /* Phase4Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Phase4Tests.swift"; path = "BreakReminderTests/Phase4Tests.swift"; sourceTree = "<group>"; };
+		A20000050000000000000005 /* Phase5Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Phase5Tests.swift"; path = "BreakReminderTests/Phase5Tests.swift"; sourceTree = "<group>"; };
+		A10000200000000000000020 /* AutomationHookManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AutomationHookManager.swift"; path = "BreakReminder/Managers/AutomationHookManager.swift"; sourceTree = "<group>"; };
+		A10000210000000000000021 /* BreakReminderIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BreakReminderIntents.swift"; path = "BreakReminder/AppIntents/BreakReminderIntents.swift"; sourceTree = "<group>"; };
+		A20000060000000000000006 /* Phase6Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Phase6Tests.swift"; path = "BreakReminderTests/Phase6Tests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +198,43 @@
 				D58E248320684F2DB9F17037 /* BreakWindowManagerTests.swift */,
 				16C92238CF12454D9CB263ED /* AppSettingsTests.swift */,
 				B6A64C32626940B09C98F6E1 /* StatisticsManagerTests.swift */,
+				A10000010000000000000001 /* BreakProfile.swift */,
+				A10000020000000000000002 /* NavigationSection.swift */,
+				A10000030000000000000003 /* ScreenScore.swift */,
+				A10000040000000000000004 /* MainWindowView.swift */,
+				A10000050000000000000005 /* ScreenBreaksModuleView.swift */,
+				A10000060000000000000006 /* SmartPauseModuleView.swift */,
+				A10000070000000000000007 /* WellnessModuleView.swift */,
+				A10000080000000000000008 /* PlannedBreaksModuleView.swift */,
+				A10000090000000000000009 /* OfficeHoursModuleView.swift */,
+				A100000A000000000000000A /* AppearanceModuleView.swift */,
+				A100000B000000000000000B /* AutomationsModuleView.swift */,
+				A100000C000000000000000C /* GeneralSettingsModuleView.swift */,
+				A20000010000000000000001 /* Phase1Tests.swift */,
+				A100000D000000000000000D /* FloatingCountdownView.swift */,
+				A100000E000000000000000E /* FloatingCountdownManager.swift */,
+				A20000020000000000000002 /* Phase2Tests.swift */,
+				A10000100000000000000010 /* SmartPauseModels.swift */,
+				A10000110000000000000011 /* SmartPauseDetector.swift */,
+				A10000120000000000000012 /* IdleDetector.swift */,
+				A10000130000000000000013 /* ActiveApplicationDetector.swift */,
+				A10000140000000000000014 /* FullscreenDetector.swift */,
+				A10000150000000000000015 /* MeetingDetector.swift */,
+				A10000160000000000000016 /* ScreenRecordingDetector.swift */,
+				A10000170000000000000017 /* VideoPlaybackDetector.swift */,
+				A10000180000000000000018 /* UserFocusAppDetector.swift */,
+				A10000190000000000000019 /* SmartPauseManager.swift */,
+				A20000030000000000000003 /* Phase3Tests.swift */,
+				A100001A000000000000001A /* PlannedBreak.swift */,
+				A100001B000000000000001B /* WellnessReminderManager.swift */,
+				A100001C000000000000001C /* PlannedBreakManager.swift */,
+				A100001D000000000000001D /* OfficeHoursManager.swift */,
+				A100001E000000000000001E /* NaturalBreakManager.swift */,
+				A20000040000000000000004 /* Phase4Tests.swift */,
+				A20000050000000000000005 /* Phase5Tests.swift */,
+				A10000200000000000000020 /* AutomationHookManager.swift */,
+				A10000210000000000000021 /* BreakReminderIntents.swift */,
+				A20000060000000000000006 /* Phase6Tests.swift */,
 				67616B872BE841B2BCD60B40 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -256,6 +367,37 @@
 				CBCA8D35B1D24C29941C2E6E /* WellnessBackground.swift in Sources */,
 				AA68B05987514E97A4DC4748 /* ProgressRingView.swift in Sources */,
 				DBFF42046CA946338B85FCBF /* DateHelpers.swift in Sources */,
+				B10000010000000000000001 /* BreakProfile.swift in Sources */,
+				B10000020000000000000002 /* NavigationSection.swift in Sources */,
+				B10000030000000000000003 /* ScreenScore.swift in Sources */,
+				B10000040000000000000004 /* MainWindowView.swift in Sources */,
+				B10000050000000000000005 /* ScreenBreaksModuleView.swift in Sources */,
+				B10000060000000000000006 /* SmartPauseModuleView.swift in Sources */,
+				B10000070000000000000007 /* WellnessModuleView.swift in Sources */,
+				B10000080000000000000008 /* PlannedBreaksModuleView.swift in Sources */,
+				B10000090000000000000009 /* OfficeHoursModuleView.swift in Sources */,
+				B100000A000000000000000A /* AppearanceModuleView.swift in Sources */,
+				B100000B000000000000000B /* AutomationsModuleView.swift in Sources */,
+				B100000C000000000000000C /* GeneralSettingsModuleView.swift in Sources */,
+				B100000D000000000000000D /* FloatingCountdownView.swift in Sources */,
+				B100000E000000000000000E /* FloatingCountdownManager.swift in Sources */,
+				B10000100000000000000010 /* SmartPauseModels.swift in Sources */,
+				B10000110000000000000011 /* SmartPauseDetector.swift in Sources */,
+				B10000120000000000000012 /* IdleDetector.swift in Sources */,
+				B10000130000000000000013 /* ActiveApplicationDetector.swift in Sources */,
+				B10000140000000000000014 /* FullscreenDetector.swift in Sources */,
+				B10000150000000000000015 /* MeetingDetector.swift in Sources */,
+				B10000160000000000000016 /* ScreenRecordingDetector.swift in Sources */,
+				B10000170000000000000017 /* VideoPlaybackDetector.swift in Sources */,
+				B10000180000000000000018 /* UserFocusAppDetector.swift in Sources */,
+				B10000190000000000000019 /* SmartPauseManager.swift in Sources */,
+				B100001A000000000000001A /* PlannedBreak.swift in Sources */,
+				B100001B000000000000001B /* WellnessReminderManager.swift in Sources */,
+				B100001C000000000000001C /* PlannedBreakManager.swift in Sources */,
+				B100001D000000000000001D /* OfficeHoursManager.swift in Sources */,
+				B100001E000000000000001E /* NaturalBreakManager.swift in Sources */,
+				B10000200000000000000020 /* AutomationHookManager.swift in Sources */,
+				B10000210000000000000021 /* BreakReminderIntents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +409,12 @@
 				225648D241F94FA0B8F3B92C /* BreakWindowManagerTests.swift in Sources */,
 				F9762C261B674D789C51D67A /* AppSettingsTests.swift in Sources */,
 				DBD199DD90704203AB45C24A /* StatisticsManagerTests.swift in Sources */,
+				B20000010000000000000001 /* Phase1Tests.swift in Sources */,
+				B20000020000000000000002 /* Phase2Tests.swift in Sources */,
+				B20000030000000000000003 /* Phase3Tests.swift in Sources */,
+				B20000040000000000000004 /* Phase4Tests.swift in Sources */,
+				B20000050000000000000005 /* Phase5Tests.swift in Sources */,
+				B20000060000000000000006 /* Phase6Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

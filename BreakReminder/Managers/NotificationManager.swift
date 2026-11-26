@@ -5,7 +5,12 @@ public protocol NotificationManaging: AnyObject {
     func requestAuthorizationIfNeeded()
     func sendWorkFinishedNotification(isLongBreak: Bool)
     func sendBreakFinishedNotification()
+    func sendPreBreakNotification(minutesRemaining: Int)
     func cancelPendingNotifications()
+}
+
+public extension NotificationManaging {
+    func sendPreBreakNotification(minutesRemaining: Int) {}
 }
 
 public final class NotificationManager: NotificationManaging {
@@ -39,6 +44,31 @@ public final class NotificationManager: NotificationManaging {
                 self.isAuthorized = false
             @unknown default:
                 self.isAuthorized = false
+            }
+        }
+    }
+    
+    public func sendPreBreakNotification(minutesRemaining: Int) {
+        guard settings.notificationsEnabled && settings.preBreakNotificationEnabled else { return }
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Break Starting Soon"
+        let minuteText = minutesRemaining == 1 ? "1 minute" : "\(minutesRemaining) minutes"
+        content.body = "Your screen break begins in \(minuteText). Wrap up your thoughts!"
+        
+        if settings.soundEnabled {
+            content.sound = .default
+        }
+        
+        let request = UNNotificationRequest(
+            identifier: "BreakReminder.preBreak.\(UUID().uuidString)",
+            content: content,
+            trigger: nil
+        )
+        
+        center.add(request) { error in
+            if let error = error {
+                NSLog("[NotificationManager] Error posting pre-break notification: %@", error.localizedDescription)
             }
         }
     }
