@@ -27,6 +27,7 @@ public final class TimerManager: ObservableObject {
     @Published public private(set) var isLongBreak: Bool = false
     @Published public private(set) var sessionStartDate: Date?
     @Published public private(set) var currentSnoozeCount: Int = 0
+    @Published public private(set) var isBreakInBackground: Bool = false
     
     // Smart Pause integration
     @Published public private(set) var isSmartPaused: Bool = false
@@ -62,6 +63,11 @@ public final class TimerManager: ObservableObject {
         return settings.allowSkip && !settings.strictMode
     }
     
+    public var canContinueBreakInBackground: Bool {
+        guard (status == .onBreak || isBreakInBackground) && !settings.strictMode else { return false }
+        return settings.allowScreenAccessDuringBreak
+    }
+    
     public init(
         settings: AppSettings = .shared,
         soundManager: SoundManaging = SoundManager.shared,
@@ -79,6 +85,12 @@ public final class TimerManager: ObservableObject {
         
         setupSystemObservers()
         restorePersistedState()
+        
+        if let notifMgr = notificationManager as? NotificationManager {
+            notifMgr.onStartWorkSessionRequested = { [weak self] in
+                self?.startWorkSession()
+            }
+        }
         
         if status == .idle && settings.autoStartWorkTimer {
             startWorkSession()
@@ -141,6 +153,7 @@ public final class TimerManager: ObservableObject {
         sessionStartDate = now
         pausedRemainingSeconds = nil
         isLongBreak = false
+        isBreakInBackground = false
         currentSnoozeCount = 0
         hasSentPreBreakNotification = false
         
@@ -203,6 +216,7 @@ public final class TimerManager: ObservableObject {
         targetEndDate = now.addingTimeInterval(duration)
         sessionStartDate = now
         pausedRemainingSeconds = nil
+        isBreakInBackground = false
         hasSentPreBreakNotification = false
         
         soundManager.playWorkFinishedSound()
@@ -239,6 +253,7 @@ public final class TimerManager: ObservableObject {
             completedWorkSessionsInCycle = 0
         }
         currentSnoozeCount = 0
+        isBreakInBackground = false
         
         AutomationHookManager.shared.handleEvent(.breakSkipped)
         resetToIdle()
@@ -261,6 +276,7 @@ public final class TimerManager: ObservableObject {
         targetEndDate = now.addingTimeInterval(snoozeDuration)
         sessionStartDate = now
         pausedRemainingSeconds = nil
+        isBreakInBackground = false
         hasSentPreBreakNotification = false
         
         saveState()
@@ -276,6 +292,20 @@ public final class TimerManager: ObservableObject {
         }
         
         handleBreakFinished()
+    }
+    
+    public func continueBreakInBackground() {
+        guard status == .onBreak && canContinueBreakInBackground else { return }
+        isBreakInBackground = true
+        breakWindowManager.hideBreakOverlay()
+        saveState()
+    }
+    
+    public func showBreakOverlay() {
+        guard status == .onBreak else { return }
+        isBreakInBackground = false
+        breakWindowManager.showBreakOverlay(timerManager: self)
+        saveState()
     }
     
     public func resetTimer() {
@@ -322,6 +352,7 @@ public final class TimerManager: ObservableObject {
         totalDurationSeconds = 0
         pausedRemainingSeconds = nil
         sessionStartDate = nil
+        isBreakInBackground = false
         hasSentPreBreakNotification = false
     }
     
@@ -408,12 +439,15 @@ public final class TimerManager: ObservableObject {
         notificationManager.sendBreakFinishedNotification()
         AutomationHookManager.shared.handleEvent(.breakEnded)
         
+        let wasInBackground = isBreakInBackground
+        isBreakInBackground = false
+        
         if isLongBreak {
             completedWorkSessionsInCycle = 0
         }
         currentSnoozeCount = 0
         
-        if settings.autoStartWorkTimer {
+        if settings.autoStartWorkTimer && !wasInBackground {
             startWorkSession()
         } else {
             resetToIdle()
@@ -433,7 +467,8 @@ public final class TimerManager: ObservableObject {
             isLongBreak: isLongBreak,
             pausedRemainingSeconds: pausedRemainingSeconds,
             lastSavedDate: Date(),
-            sessionStartDate: sessionStartDate
+            sessionStartDate: sessionStartDate,
+            isBreakInBackground: isBreakInBackground
         )
         
         do {
@@ -488,7 +523,10 @@ public final class TimerManager: ObservableObject {
                         self.status = .onBreak
                         self.targetEndDate = target
                         self.remainingSeconds = diff
-                        breakWindowManager.showBreakOverlay(timerManager: self)
+                        self.isBreakInBackground = snapshot.isBreakInBackground
+                        if !snapshot.isBreakInBackground {
+                            breakWindowManager.showBreakOverlay(timerManager: self)
+                        }
                         startTicker()
                     } else {
                         // Break expired while app was closed

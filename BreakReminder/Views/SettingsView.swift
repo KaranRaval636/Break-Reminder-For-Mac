@@ -128,6 +128,9 @@ public struct SettingsView: View {
                 
                 Toggle("Show break overlay on all displays", isOn: $settings.allDisplays)
                     .help("When checked, all connected monitors are covered with the wellness screen.")
+                
+                Toggle("Allow accessing screen during break", isOn: $settings.allowScreenAccessDuringBreak)
+                    .help("Allows continuing the break in the background while using your screen.")
             }
             
             Section(header: Text("Snooze Options").font(.headline)) {

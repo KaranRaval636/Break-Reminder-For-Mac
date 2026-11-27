@@ -123,6 +123,24 @@ public struct MenuBarView: View {
                     
                 case .onBreak:
                     VStack(spacing: 6) {
+                        if timerManager.isBreakInBackground {
+                            Button(action: {
+                                timerManager.showBreakOverlay()
+                            }) {
+                                Label("Show Break Overlay", systemImage: "macwindow.badge.plus")
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .buttonStyle(.bordered)
+                        } else if timerManager.canContinueBreakInBackground {
+                            Button(action: {
+                                timerManager.continueBreakInBackground()
+                            }) {
+                                Label("Access Screen (Keep Break)", systemImage: "macwindow.on.rectangle")
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .buttonStyle(.bordered)
+                        }
+                        
                         HStack(spacing: 8) {
                             if timerManager.canSnooze {
                                 Button(action: {
@@ -218,7 +236,7 @@ public struct MenuBarView: View {
             Circle()
                 .fill(statusColor)
                 .frame(width: 7, height: 7)
-            Text(timerManager.status.displayName)
+            Text(statusBadgeText)
                 .font(.system(size: 11, weight: .semibold))
                 .foregroundColor(statusColor)
         }
@@ -253,7 +271,17 @@ public struct MenuBarView: View {
         case .paused:
             return "Paused"
         case .onBreak:
+            if timerManager.isBreakInBackground {
+                return timerManager.isLongBreak ? "Long break (screen accessible)" : "Short break (screen accessible)"
+            }
             return timerManager.isLongBreak ? "Long restorative break" : "Short refresh break"
         }
+    }
+    
+    private var statusBadgeText: String {
+        if timerManager.status == .onBreak && timerManager.isBreakInBackground {
+            return "Break (Background)"
+        }
+        return timerManager.status.displayName
     }
 }

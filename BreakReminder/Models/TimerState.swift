@@ -60,6 +60,20 @@ public struct TimerSnapshot: Codable, Equatable {
     public var pausedRemainingSeconds: TimeInterval?
     public var lastSavedDate: Date
     public var sessionStartDate: Date?
+    public var isBreakInBackground: Bool
+    
+    enum CodingKeys: String, CodingKey {
+        case status
+        case targetEndDate
+        case remainingSeconds
+        case totalDurationSeconds
+        case completedWorkSessionsInCycle
+        case isLongBreak
+        case pausedRemainingSeconds
+        case lastSavedDate
+        case sessionStartDate
+        case isBreakInBackground
+    }
     
     public init(
         status: TimerStatus,
@@ -70,7 +84,8 @@ public struct TimerSnapshot: Codable, Equatable {
         isLongBreak: Bool,
         pausedRemainingSeconds: TimeInterval?,
         lastSavedDate: Date,
-        sessionStartDate: Date? = nil
+        sessionStartDate: Date? = nil,
+        isBreakInBackground: Bool = false
     ) {
         self.status = status
         self.targetEndDate = targetEndDate
@@ -81,5 +96,20 @@ public struct TimerSnapshot: Codable, Equatable {
         self.pausedRemainingSeconds = pausedRemainingSeconds
         self.lastSavedDate = lastSavedDate
         self.sessionStartDate = sessionStartDate
+        self.isBreakInBackground = isBreakInBackground
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        status = try container.decode(TimerStatus.self, forKey: .status)
+        targetEndDate = try container.decodeIfPresent(Date.self, forKey: .targetEndDate)
+        remainingSeconds = try container.decode(TimeInterval.self, forKey: .remainingSeconds)
+        totalDurationSeconds = try container.decode(TimeInterval.self, forKey: .totalDurationSeconds)
+        completedWorkSessionsInCycle = try container.decode(Int.self, forKey: .completedWorkSessionsInCycle)
+        isLongBreak = try container.decode(Bool.self, forKey: .isLongBreak)
+        pausedRemainingSeconds = try container.decodeIfPresent(TimeInterval.self, forKey: .pausedRemainingSeconds)
+        lastSavedDate = try container.decode(Date.self, forKey: .lastSavedDate)
+        sessionStartDate = try container.decodeIfPresent(Date.self, forKey: .sessionStartDate)
+        isBreakInBackground = try container.decodeIfPresent(Bool.self, forKey: .isBreakInBackground) ?? false
     }
 }

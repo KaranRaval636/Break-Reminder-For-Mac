@@ -291,4 +291,93 @@ final class TimerManagerTests: XCTestCase {
         XCTAssertEqual(restoredManager.status, .idle)
         XCTAssertEqual(restoredManager.completedWorkSessionsInCycle, 1)
     }
+    
+    func testContinueBreakInBackgroundAndRestoreOverlay() {
+        sut.startBreak(isLong: false)
+        XCTAssertTrue(breakWindowManager.isShowingOverlay)
+        XCTAssertFalse(sut.isBreakInBackground)
+        XCTAssertTrue(sut.canContinueBreakInBackground)
+        
+        // Continue break while accessing screen
+        sut.continueBreakInBackground()
+        XCTAssertFalse(breakWindowManager.isShowingOverlay)
+        XCTAssertTrue(sut.isBreakInBackground)
+        XCTAssertEqual(sut.status, .onBreak)
+        
+        // Show break overlay again
+        sut.showBreakOverlay()
+        XCTAssertTrue(breakWindowManager.isShowingOverlay)
+        XCTAssertFalse(sut.isBreakInBackground)
+        XCTAssertEqual(sut.status, .onBreak)
+    }
+    
+    func testContinueBreakInBackgroundRespectsStrictMode() {
+        settings.strictMode = true
+        sut.startBreak(isLong: false)
+        XCTAssertFalse(sut.canContinueBreakInBackground)
+        
+        sut.continueBreakInBackground()
+        XCTAssertFalse(sut.isBreakInBackground)
+        XCTAssertTrue(breakWindowManager.isShowingOverlay)
+    }
+    
+    func testContinueBreakInBackgroundRespectsSetting() {
+        settings.allowScreenAccessDuringBreak = false
+        sut.startBreak(isLong: false)
+        XCTAssertFalse(sut.canContinueBreakInBackground)
+        
+        sut.continueBreakInBackground()
+        XCTAssertFalse(sut.isBreakInBackground)
+        XCTAssertTrue(breakWindowManager.isShowingOverlay)
+    }
+    
+    func testBreakCompletedWhileInBackgroundSendsNotification() {
+        sut.startBreak(isLong: false)
+        sut.continueBreakInBackground()
+        XCTAssertTrue(sut.isBreakInBackground)
+        
+        // Advance time past the break end
+        let futureDate = Date().addingTimeInterval(1000)
+        sut.tick(currentDate: futureDate)
+        
+        XCTAssertEqual(sut.status, .idle)
+        XCTAssertFalse(sut.isBreakInBackground)
+        XCTAssertEqual(notificationManager.sentBreakFinishedCount, 1)
+        XCTAssertEqual(soundManager.playedBreakFinishedCount, 1)
+    }
+    
+    func testBackgroundBreakPersistence() {
+        sut.startBreak(isLong: false)
+        sut.continueBreakInBackground()
+        sut.saveState()
+        
+        let restoredManager = TimerManager(
+            settings: settings,
+            soundManager: soundManager,
+            notificationManager: notificationManager,
+            statisticsManager: statisticsManager,
+            breakWindowManager: breakWindowManager,
+            defaults: userDefaults
+        )
+        
+        XCTAssertEqual(restoredManager.status, .onBreak)
+        XCTAssertTrue(restoredManager.isBreakInBackground)
+        XCTAssertFalse(breakWindowManager.isShowingOverlay)
+    }
+    
+    func testNotificationActionStartsWorkSession() {
+        let notifMgr = NotificationManager(center: nil, settings: settings)
+        let timer = TimerManager(
+            settings: settings,
+            soundManager: soundManager,
+            notificationManager: notifMgr,
+            statisticsManager: statisticsManager,
+            breakWindowManager: breakWindowManager,
+            defaults: userDefaults
+        )
+        
+        XCTAssertEqual(timer.status, .idle)
+        notifMgr.onStartWorkSessionRequested?()
+        XCTAssertEqual(timer.status, .working)
+    }
 }

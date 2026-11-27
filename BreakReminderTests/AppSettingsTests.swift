@@ -42,6 +42,7 @@ final class AppSettingsTests: XCTestCase {
         sut.allDisplays = false
         sut.soundEnabled = false
         sut.notificationsEnabled = false
+        sut.allowScreenAccessDuringBreak = false
         
         sut.restoreDefaults()
         
@@ -53,5 +54,15 @@ final class AppSettingsTests: XCTestCase {
         XCTAssertEqual(sut.allDisplays, AppSettings.defaultAllDisplays)
         XCTAssertEqual(sut.soundEnabled, AppSettings.defaultSoundEnabled)
         XCTAssertEqual(sut.notificationsEnabled, AppSettings.defaultNotificationsEnabled)
+        XCTAssertEqual(sut.allowScreenAccessDuringBreak, AppSettings.defaultAllowScreenAccessDuringBreak)
+    }
+    
+    func testAllowScreenAccessDuringBreakSetting() {
+        XCTAssertTrue(sut.allowScreenAccessDuringBreak)
+        sut.allowScreenAccessDuringBreak = false
+        XCTAssertFalse(sut.allowScreenAccessDuringBreak)
+        
+        let restored = AppSettings(defaults: userDefaults)
+        XCTAssertFalse(restored.allowScreenAccessDuringBreak)
     }
 }

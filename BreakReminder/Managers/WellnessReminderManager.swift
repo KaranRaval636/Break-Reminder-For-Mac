@@ -11,10 +11,15 @@ public protocol WellnessReminderManaging: AnyObject {
 public final class WellnessReminderManager: ObservableObject, WellnessReminderManaging {
     public static let shared = WellnessReminderManager()
     
+    public static var isUserNotificationCenterSupported: Bool {
+        guard NSClassFromString("XCTestCase") == nil else { return false }
+        return Bundle.main.bundleURL.pathExtension == "app" || (Bundle.main.infoDictionary?["CFBundlePackageType"] as? String == "APPL")
+    }
+    
     private let settings: AppSettings
     private let timerManager: TimerManager
     private let smartPauseManager: SmartPauseManager
-    private let notificationCenter: UNUserNotificationCenter
+    private let notificationCenter: UNUserNotificationCenter?
     
     private var blinkLastFired: Date
     private var postureLastFired: Date
@@ -24,7 +29,7 @@ public final class WellnessReminderManager: ObservableObject, WellnessReminderMa
         settings: AppSettings = .shared,
         timerManager: TimerManager = .shared,
         smartPauseManager: SmartPauseManager = .shared,
-        notificationCenter: UNUserNotificationCenter = .current()
+        notificationCenter: UNUserNotificationCenter? = (isUserNotificationCenterSupported ? .current() : nil)
     ) {
         self.settings = settings
         self.timerManager = timerManager
@@ -91,7 +96,7 @@ public final class WellnessReminderManager: ObservableObject, WellnessReminderMa
     }
     
     private func fireBlinkNotification() {
-        guard settings.notificationsEnabled else { return }
+        guard settings.notificationsEnabled, let notificationCenter = notificationCenter else { return }
         let content = UNMutableNotificationContent()
         content.title = "Blink & Rest Eyes (20-20-20)"
         content.body = settings.blinkCustomMessage
@@ -112,7 +117,7 @@ public final class WellnessReminderManager: ObservableObject, WellnessReminderMa
     }
     
     private func firePostureNotification() {
-        guard settings.notificationsEnabled else { return }
+        guard settings.notificationsEnabled, let notificationCenter = notificationCenter else { return }
         let content = UNMutableNotificationContent()
         content.title = "Ergonomic Posture Check"
         content.body = settings.postureCustomMessage

@@ -59,6 +59,7 @@ public final class AppSettings: ObservableObject {
         static let floatingCountdownEnabled = "floatingCountdownEnabled"
         static let snoozeLimit = "snoozeLimit"
         static let allowSkip = "allowSkip"
+        static let allowScreenAccessDuringBreak = "allowScreenAccessDuringBreak"
         static let strictMode = "strictMode"
         static let manualBreakCompletion = "manualBreakCompletion"
         static let customBreakTitle = "customBreakTitle"
@@ -180,6 +181,7 @@ public final class AppSettings: ObservableObject {
     public static let defaultBreathingGuideEnabled: Bool = true
     public static let defaultSnoozeLimit: Int = 3
     public static let defaultAllowSkip: Bool = true
+    public static let defaultAllowScreenAccessDuringBreak: Bool = true
     public static let defaultStrictMode: Bool = false
     public static let defaultManualBreakCompletion: Bool = false
     public static let defaultCustomBreakTitle: String = "Time to take a break!"
@@ -331,6 +333,12 @@ public final class AppSettings: ObservableObject {
     @Published public var allowSkip: Bool {
         didSet {
             defaults.set(allowSkip, forKey: Keys.allowSkip)
+        }
+    }
+    
+    @Published public var allowScreenAccessDuringBreak: Bool {
+        didSet {
+            defaults.set(allowScreenAccessDuringBreak, forKey: Keys.allowScreenAccessDuringBreak)
         }
     }
     
@@ -613,6 +621,7 @@ public final class AppSettings: ObservableObject {
         self.breathingGuideEnabled = defaults.object(forKey: Keys.breathingGuideEnabled) as? Bool ?? Self.defaultBreathingGuideEnabled
         self.snoozeLimit = defaults.object(forKey: Keys.snoozeLimit) as? Int ?? Self.defaultSnoozeLimit
         self.allowSkip = defaults.object(forKey: Keys.allowSkip) as? Bool ?? Self.defaultAllowSkip
+        self.allowScreenAccessDuringBreak = defaults.object(forKey: Keys.allowScreenAccessDuringBreak) as? Bool ?? Self.defaultAllowScreenAccessDuringBreak
         self.strictMode = defaults.object(forKey: Keys.strictMode) as? Bool ?? Self.defaultStrictMode
         self.manualBreakCompletion = defaults.object(forKey: Keys.manualBreakCompletion) as? Bool ?? Self.defaultManualBreakCompletion
         self.customBreakTitle = defaults.string(forKey: Keys.customBreakTitle) ?? Self.defaultCustomBreakTitle
@@ -709,6 +718,7 @@ public final class AppSettings: ObservableObject {
         breathingGuideEnabled = Self.defaultBreathingGuideEnabled
         snoozeLimit = Self.defaultSnoozeLimit
         allowSkip = Self.defaultAllowSkip
+        allowScreenAccessDuringBreak = Self.defaultAllowScreenAccessDuringBreak
         strictMode = Self.defaultStrictMode
         manualBreakCompletion = Self.defaultManualBreakCompletion
         customBreakTitle = Self.defaultCustomBreakTitle

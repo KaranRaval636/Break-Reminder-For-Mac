@@ -187,11 +187,21 @@ public struct ScreenBreaksModuleView: View {
                         }
                     }
                     
+                    Toggle(isOn: $settings.allowScreenAccessDuringBreak) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Allow accessing screen during breaks")
+                                .font(.body)
+                            Text("Allows continuing the break in the background while using your screen")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    
                     Toggle(isOn: $settings.strictMode) {
                         VStack(alignment: .leading, spacing: 2) {
                             Text("Strict Mode (Enforced Breaks)")
                                 .font(.body)
-                            Text("Disables both Skip and Snooze buttons during breaks")
+                            Text("Disables Skip, Snooze, and Access Screen buttons during breaks")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }

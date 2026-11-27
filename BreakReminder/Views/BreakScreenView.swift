@@ -237,6 +237,31 @@ public struct BreakScreenView: View {
                 .buttonStyle(.plain)
             }
             
+            // Continue Break While Accessing Screen
+            if timerManager.canContinueBreakInBackground {
+                Button(action: {
+                    timerManager.continueBreakInBackground()
+                }) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "macwindow.on.rectangle")
+                        Text("Continue Break & Access Screen")
+                    }
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(textColor)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.white.opacity(0.18))
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                    )
+                }
+                .buttonStyle(.plain)
+            }
+            
             // End Break Early Button
             Button(action: {
                 timerManager.completeBreakEarly()
